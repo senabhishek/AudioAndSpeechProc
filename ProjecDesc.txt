@@ -1,0 +1,12 @@
+As part of the coruse digital audio and speech processing, students carry out a compulsary project. The requirements on this year's project are given below:
+•Project is compulsory and carried out in groups of 2-3 students
+•Evaluation is done during the exam (hand in report)
+Project:
+•Design and build a single-channel speech enhancement system with hearing aid functionality
+•Use matlab/simulink
+•The speech enhancement system should consist of a gain function, noise PSD estimator and speech PSD estimator.
+•Using a hearing loss profile, the hearing aid functionality should be able to carry out a frequency dependent gain and compression.
+•Perform an evaluation of the speech enhancement system
+Bonus:
+•Make the system work real-time (use simulink functions)
+•The system uses the built-in microphone of the laptop (use the provided simulink functionality)
