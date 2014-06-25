@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.59"
+    ComputedModelVersion    "1.68"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -55,8 +55,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[1406.0, 704.0]
-	ZoomFactor		[0.8]
-	Offset			[-341.56683454204051, -109.45775291157486]
+	ZoomFactor		[1.75]
+	Offset			[12.897451172245052, 12.399389945568224]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Abhi"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Jun 25 18:51:15 2014"
-  RTWModifiedTimeStamp	  325623063
-  ModelVersionFormat	  "1.%<AutoIncrement:59>"
+  LastModifiedDate	  "Wed Jun 25 19:59:34 2014"
+  RTWModifiedTimeStamp	  325626281
+  ModelVersionFormat	  "1.%<AutoIncrement:68>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -816,6 +816,15 @@ Model {
       BusSelectionMode	      off
     }
     Block {
+      BlockType		      FromWorkspace
+      VariableName	      "simulink_input"
+      OutDataTypeStr	      "Inherit: auto"
+      SampleTime	      "-1"
+      Interpolate	      on
+      ZeroCross		      off
+      OutputAfterFinalValue   "Extrapolation"
+    }
+    Block {
       BlockType		      Inport
       Port		      "1"
       OutputFunctionCall      off
@@ -970,9 +979,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "80"
+    ZoomFactor		    "175"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "201"
+    SIDHighWatermark	    "205"
     Block {
       BlockType		      SubSystem
       Name		      "Bias Correction"
@@ -1091,6 +1100,13 @@ Model {
       SID		      "112"
       Position		      [30, 165, 60, 195]
       ZOrder		      172
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Constant1"
+      SID		      "205"
+      Position		      [570, 200, 600, 230]
+      ZOrder		      237
     }
     Block {
       BlockType		      ToWorkspace
@@ -1234,6 +1250,26 @@ Model {
       }
     }
     Block {
+      BlockType		      FromWorkspace
+      Name		      "From\nWorkspace"
+      SID		      "203"
+      Position		      [355, 248, 380, 262]
+      ZOrder		      235
+      VariableName	      "FS"
+      SampleTime	      "0"
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      FromWorkspace
+      Name		      "From\nWorkspace1"
+      SID		      "204"
+      Position		      [345, 293, 410, 317]
+      ZOrder		      236
+      VariableName	      "unbiasedNoiseVarianceEstimateSPP"
+      SampleTime	      "0"
+      ZeroCross		      on
+    }
+    Block {
       BlockType		      SubSystem
       Name		      "Inverse Transform\n&\nOverlap-Add"
       SID		      "99"
@@ -1356,6 +1392,149 @@ Model {
 	  SrcBlock		  "In1"
 	  SrcPort		  1
 	  DstBlock		  "Inverse \nShort-Time FFT"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "MATLAB Function"
+      SID		      "202"
+      Ports		      [3, 1]
+      Position		      [440, 216, 510, 264]
+      ZOrder		      234
+      LibraryVersion	      "1.32"
+      ErrorFcn		      "Stateflow.Translate.translate"
+      PermitHierarchicalResolution "ExplicitOnly"
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      SFBlockType	      "MATLAB Function"
+      System {
+	Name			"MATLAB Function"
+	Location		[219, 337, 814, 775]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SIDHighWatermark	"23"
+	Block {
+	  BlockType		  Inport
+	  Name			  "u"
+	  SID			  "202::1"
+	  Position		  [20, 101, 40, 119]
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "fs"
+	  SID			  "202::21"
+	  Position		  [20, 136, 40, 154]
+	  ZOrder		  7
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "noisePow"
+	  SID			  "202::23"
+	  Position		  [20, 171, 40, 189]
+	  ZOrder		  9
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  " Demux "
+	  SID			  "202::19"
+	  Ports			  [1, 1]
+	  Position		  [270, 230, 320, 270]
+	  ZOrder		  5
+	  Outputs		  "1"
+	}
+	Block {
+	  BlockType		  S-Function
+	  Name			  " SFunction "
+	  SID			  "202::18"
+	  Tag			  "Stateflow S-Function offlineProcessing 2"
+	  Ports			  [3, 2]
+	  Position		  [180, 100, 230, 180]
+	  ZOrder		  4
+	  FunctionName		  "sf_sfun"
+	  PortCounts		  "[3 2]"
+	  EnableBusSupport	  off
+	  Port {
+	    PortNumber		    2
+	    Name		    "y"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  " Terminator "
+	  SID			  "202::20"
+	  Position		  [460, 241, 480, 259]
+	  ZOrder		  6
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "y"
+	  SID			  "202::5"
+	  Position		  [460, 101, 480, 119]
+	  ZOrder		  -5
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  20
+	  SrcBlock		  "u"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  21
+	  SrcBlock		  "fs"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  22
+	  SrcBlock		  "noisePow"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  3
+	}
+	Line {
+	  Name			  "y"
+	  ZOrder		  23
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  2
+	  DstBlock		  "y"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  24
+	  SrcBlock		  " Demux "
+	  SrcPort		  1
+	  DstBlock		  " Terminator "
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  25
+	  SrcBlock		  " SFunction "
+	  SrcPort		  1
+	  DstBlock		  " Demux "
 	  DstPort		  1
 	}
       }
@@ -2059,7 +2238,7 @@ Model {
       Name		      "To Workspace1"
       SID		      "193"
       Ports		      [1]
-      Position		      [370, 210, 430, 240]
+      Position		      [550, 345, 610, 375]
       ZOrder		      229
       VariableName	      "unbiasedNoiseVarianceEstimateSPP"
       MaxDataPoints	      "inf"
@@ -2185,13 +2364,6 @@ Model {
       DstPort		      1
     }
     Line {
-      ZOrder		      304
-      SrcBlock		      "SPP Noise Estimator Handler"
-      SrcPort		      1
-      DstBlock		      "To Workspace1"
-      DstPort		      1
-    }
-    Line {
       ZOrder		      158
       SrcBlock		      "Framing & Transform"
       SrcPort		      1
@@ -2207,6 +2379,45 @@ Model {
 	DstBlock		"MS Noise Estimator Handler"
 	DstPort			1
       }
+    }
+    Line {
+      ZOrder		      313
+      SrcBlock		      "From\nWorkspace"
+      SrcPort		      1
+      Points		      [17, 0; 0, -15]
+      DstBlock		      "MATLAB Function"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      315
+      SrcBlock		      "SPP Noise Estimator Handler"
+      SrcPort		      1
+      Points		      [98, 0]
+      Branch {
+	ZOrder			321
+	Points			[0, -15; 153, 0; 0, 55; 20, 0]
+      }
+      Branch {
+	ZOrder			320
+	DstBlock		"MATLAB Function"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      318
+      SrcBlock		      "MATLAB Function"
+      SrcPort		      1
+      Points		      [16, 0; 0, 120]
+      DstBlock		      "To Workspace1"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      319
+      SrcBlock		      "From\nWorkspace1"
+      SrcPort		      1
+      Points		      [9, 0; 0, -50]
+      DstBlock		      "MATLAB Function"
+      DstPort		      3
     }
   }
 }
@@ -2244,31 +2455,31 @@ Stateflow {
     name		    "offlineProcessing"
     created		    "23-Jun-2014 17:24:56"
     isLibrary		    0
-    firstTarget		    9
+    firstTarget		    18
     sfVersion		    76014001.002
   }
   chart {
     id			    2
-    name		    "MATLAB Function2"
+    name		    "MATLAB Function"
     windowPosition	    [352.761 488.141 161 328]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 1280 1024 1.000677131425054]
     treeNode		    [0 3 0 0]
-    firstTransition	    7
-    firstJunction	    6
+    firstTransition	    9
+    firstJunction	    8
     viewObj		    2
     visible		    1
     machine		    1
     subviewS {
     }
-    ssIdHighWaterMark	    5
+    ssIdHighWaterMark	    7
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
     firstData		    4
-    chartFileNumber	    3
+    chartFileNumber	    2
     disableImplicitCasting  1
     eml {
-      name		      "calculateGain"
+      name		      "fcn"
     }
   }
   state {
@@ -2285,7 +2496,36 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function y = calculateGain(u)\n%#codegen\n\ny = u;"
+      script		      "function y = fcn(u, fs, noisePow)\n%#codegen\n\n%% some constants\nfrLen   = 32e-3*fs;  % frame s"
+      "ize % NOT CLEAR\nfShift  = frLen/2;   % fShift size\nnFrames = floor(length(u)/fShift)-1; % number of frames\n\n"
+      "anWin  = hanning(frLen,'periodic'); %analysis window\n\n%% allocate some memory\nnoisePowMat = zeros(frLen/2+1,n"
+      "Frames);\n\n\n%% initialize\nif noisePow == -1\n    noisePow = init_noise_tracker_ideal_vad(u,frLen,frLen,fShift"
+      ", anWin); % This function computes the initial noise PSD estimate. It is assumed that the first 5 time-frames ar"
+      "e noise-only.\n    y = noisePow;\n    return;\nend\n\n%\nPH1mean  = 0.5;\nalphaPH1mean = 0.9;\nalphaPSD = 0.8;\n"
+      "\n%constants for a posteriori SPP\nq          = 0.5; % a priori probability of speech presence:\npriorFact  = q."
+      "/(1-q); % EQN (15) ???\n% Fixing 15dB as the a priori SNR -> PAGE 6 Right (bottom)\nxiOptDb    = 15; % optimal f"
+      "ixed a priori SNR for SPP estimation\nxiOpt      = 10.^(xiOptDb./10);\nlogGLRFact = log(1./(1+xiOpt));\nGLRexp  "
+      "   = xiOpt./(1+xiOpt);\n\n% for indFr = 1:nFrames\n%     indices       = (indFr-1)*fShift+1:(indFr-1)*fShift+frL"
+      "en;\n%     noisy_frame   = anWin.*noisy(indices);\n%     noisyDftFrame = fft(noisy_frame,frLen); %512\n%     noi"
+      "syDftFrame = noisyDftFrame(1:frLen/2+1); %256\n	\n%     noisyPer = noisyDftFrame.*conj(noisyDftFrame); % <-(1)\n"
+      "    noisyPer = u.*conj(u); % <-(1)\n    snrPost1 =  noisyPer./(noisePow);% a posteriori SNR based on old noise p"
+      "ower estimate\n\n\n    %% noise power estimation\n	GLR     = priorFact .* exp(min(logGLRFact + GLRexp.*snrPost1,"
+      "200));\n	PH1     = GLR./(1+GLR); % a posteriori speech presence probability\n\n	PH1mean  = alphaPH1mean * PH1mea"
+      "n + (1-alphaPH1mean) * PH1; % EQN (23)\n	stuckInd = PH1mean > 0.99;                                  \n	PH1(stuc"
+      "kInd) = min(PH1(stuckInd),0.99);                    % EQN (24)\n	estimate =  PH1 .* noisePow + (1-PH1) .* noisyP"
+      "er ; % noisyPer is obtained from DFT of windowed data over frame length -> (1) EQN (22)\n	noisePow = alphaPSD *n"
+      "oisePow+(1-alphaPSD)*estimate;                                                                        % EQN (7)\n"
+      "        \n% 	noisePowMat(:,indFr) = noisePow;\n    y = noisePow;\n% end\nreturn\n\n\n\n\n\n%%%%%%%%%%%%%%%%%%%%%"
+      "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n\nfunction   noise_psd_init =init_noise_tr"
+      "acker_ideal_vad(noisy,fr_size,fft_size,hop,sq_hann_window)\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n%%%%This m-f"
+      "ile computes an initial noise PSD estimate by means of a\n%%%%Bartlett estimate.\n%%%%Input parameters:   noisy:"
+      "          noisy signal\n%%%%                    fr_size:        frame size\n%%%%                    fft_size:   "
+      "    fft size\n%%%%                    hop:            hop size of frame\n%%%%                    sq_hann_window:"
+      " analysis window\n%%%%Output parameters:  noise_psd_init: initial noise PSD estimate\n%%%%\n%%%%%%%%%%%%%%%%%%%%"
+      "%%%%%%%%%%%%%%%%%%%%%%\n%%%%%%%%%%%%%%%%%%%%%%Author: Richard C. Hendriks, 15/4/2010\n%%%%%%%%%%%%%%%%%%%%%%%\n%"
+      "%%%%%%%%%%%%%%%%%%%%\n \nfor I=1:5\n    noisy_frame=sq_hann_window.*noisy((I-1)*hop+1:(I-1)*hop+fr_size);\n    n"
+      "oisy_dft_frame_matrix(:,I)=fft(noisy_frame,fft_size);\nend\nnoise_psd_init=mean(abs(noisy_dft_frame_matrix(1:fr_"
+      "size/2+1,1:end)).^2,2);%%%compute the initialisation of the noise tracking algorithms.\nreturn"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -2312,7 +2552,171 @@ Stateflow {
     id			    5
     ssIdNumber		    5
     name		    "y"
-    linkNode		    [2 4 0]
+    linkNode		    [2 4 6]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    6
+    ssIdNumber		    6
+    name		    "fs"
+    linkNode		    [2 5 7]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    7
+    ssIdNumber		    7
+    name		    "noisePow"
+    linkNode		    [2 6 0]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    8
+    position		    [23.5747 49.5747 7]
+    chart		    2
+    linkNode		    [2 0 0]
+    subviewer		    2
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    9
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [36.125 25.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      8
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    2
+    linkNode		    [2 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    10
+    name		    "MATLAB Function"
+    machine		    1
+    chart		    2
+  }
+  chart {
+    id			    11
+    name		    "MATLAB Function2"
+    windowPosition	    [352.761 488.141 161 328]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1280 1024 1.000677131425054]
+    treeNode		    [0 12 0 0]
+    firstTransition	    16
+    firstJunction	    15
+    viewObj		    11
+    visible		    1
+    machine		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    5
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    13
+    chartFileNumber	    3
+    disableImplicitCasting  1
+    eml {
+      name		      "calculateGain"
+    }
+  }
+  state {
+    id			    12
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    11
+    treeNode		    [11 0 0 0]
+    superState		    SUBCHART
+    subviewer		    11
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function y = calculateGain(u)\n%#codegen\n\ny = u;"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    13
+    ssIdNumber		    4
+    name		    "u"
+    linkNode		    [11 0 14]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    14
+    ssIdNumber		    5
+    name		    "y"
+    linkNode		    [11 13 0]
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -2329,16 +2733,16 @@ Stateflow {
     dataType		    "Inherit: Same as Simulink"
   }
   junction {
-    id			    6
+    id			    15
     position		    [23.5747 49.5747 7]
-    chart		    2
-    linkNode		    [2 0 0]
-    subviewer		    2
+    chart		    11
+    linkNode		    [11 0 0]
+    subviewer		    11
     ssIdNumber		    3
     type		    CONNECTIVE_JUNCTION
   }
   transition {
-    id			    7
+    id			    16
     labelString		    "{eML_blk_kernel();}"
     labelPosition	    [36.125 25.875 102.544 14.964]
     fontSize		    12
@@ -2346,14 +2750,14 @@ Stateflow {
       intersection	      [0 0 1 0 23.5747 14.625 0 0]
     }
     dst {
-      id		      6
+      id		      15
       intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
     }
     midPoint		    [23.5747 24.9468]
-    chart		    2
-    linkNode		    [2 0 0]
+    chart		    11
+    linkNode		    [11 0 0]
     dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    2
+    subviewer		    11
     drawStyle		    SMART
     slide {
       sticky		      BOTH_STICK
@@ -2362,13 +2766,13 @@ Stateflow {
     ssIdNumber		    2
   }
   instance {
-    id			    8
+    id			    17
     name		    "MATLAB Function2"
     machine		    1
-    chart		    2
+    chart		    11
   }
   target {
-    id			    9
+    id			    18
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
