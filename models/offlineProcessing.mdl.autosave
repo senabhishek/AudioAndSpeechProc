@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.59"
+    ComputedModelVersion    "1.56"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -56,7 +56,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1406.0, 704.0]
 	ZoomFactor		[0.8]
-	Offset			[-341.56683454204051, -109.45775291157486]
+	Offset			[-341.56683454204051, -9.4577529115748575]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Abhi"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Jun 25 18:51:15 2014"
-  RTWModifiedTimeStamp	  325623063
-  ModelVersionFormat	  "1.%<AutoIncrement:59>"
+  LastModifiedDate	  "Wed Jun 25 18:40:18 2014"
+  RTWModifiedTimeStamp	  325622792
+  ModelVersionFormat	  "1.%<AutoIncrement:56>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -978,8 +978,9 @@ Model {
       Name		      "Bias Correction"
       SID		      "181"
       Ports		      [1, 1]
-      Position		      [560, 167, 610, 193]
+      Position		      [560, 267, 610, 293]
       ZOrder		      223
+      Commented		      "on"
       RequestExecContextInheritance off
       System {
 	Name			"Bias Correction"
@@ -1089,18 +1090,33 @@ Model {
       BlockType		      Constant
       Name		      "Constant"
       SID		      "112"
-      Position		      [30, 165, 60, 195]
+      Position		      [30, 265, 60, 295]
       ZOrder		      172
+      Commented		      "on"
     }
     Block {
       BlockType		      ToWorkspace
       Name		      "Estimated Clean\nOutput"
       SID		      "88"
       Ports		      [1]
-      Position		      [1325, 35, 1395, 65]
+      Position		      [1325, 135, 1395, 165]
       ZOrder		      123
       Commented		      "on"
       VariableName	      "offlineFilteredOutput"
+      MaxDataPoints	      "inf"
+      SaveFormat	      "Structure"
+      Save2DSignal	      "2-D array (concatenate along first dimension)"
+      FixptAsFi		      on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "Estimated Clean\nOutput1"
+      SID		      "194"
+      Ports		      [1]
+      Position		      [685, 35, 755, 65]
+      ZOrder		      230
+      VariableName	      "offlineFilteredOutput1"
       MaxDataPoints	      "inf"
       SaveFormat	      "Structure"
       Save2DSignal	      "2-D array (concatenate along first dimension)"
@@ -1112,7 +1128,7 @@ Model {
       Name		      "Framing & Transform"
       SID		      "96"
       Ports		      [1, 1]
-      Position		      [110, 37, 165, 63]
+      Position		      [110, 137, 165, 163]
       ZOrder		      162
       RequestExecContextInheritance off
       System {
@@ -1238,7 +1254,7 @@ Model {
       Name		      "Inverse Transform\n&\nOverlap-Add"
       SID		      "99"
       Ports		      [1, 1]
-      Position		      [1185, 20, 1250, 80]
+      Position		      [1185, 120, 1250, 180]
       ZOrder		      163
       Commented		      "on"
       RequestExecContextInheritance off
@@ -1362,10 +1378,136 @@ Model {
     }
     Block {
       BlockType		      SubSystem
+      Name		      "Inverse Transform\n&\nOverlap-Add1"
+      SID		      "195"
+      Ports		      [1, 1]
+      Position		      [545, 20, 610, 80]
+      ZOrder		      232
+      RequestExecContextInheritance off
+      System {
+	Name			"Inverse Transform\n&\nOverlap-Add1"
+	Location		[301, 66, 1324, 898]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"97"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  SID			  "196"
+	  Position		  [20, 18, 50, 32]
+	  ZOrder		  162
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Inverse\nTransform\nWindow"
+	  SID			  "197"
+	  Ports			  [0, 1]
+	  Position		  [185, 54, 240, 96]
+	  ZOrder		  161
+	  LibraryVersion	  "1.735"
+	  SourceBlock		  "dspsigops/Window\nFunction"
+	  SourceType		  "Window Function"
+	  winmode		  "Generate window"
+	  wintype		  "Hanning"
+	  sampmode		  "Discrete"
+	  samptime		  "1"
+	  N			  "numSamplesPer20msFrame"
+	  Rs			  "50"
+	  beta			  "10"
+	  winsamp		  "Symmetric"
+	  UserWindow		  "hamming"
+	  OptParams		  off
+	  UserParams		  "{'symmetric'}"
+	  RowConvenienceOn	  on
+	  additionalParams	  off
+	  allowOverrides	  on
+	  dataType		  "double"
+	  isSigned		  on
+	  wordLen		  "16"
+	  udDataType		  "sfix(16)"
+	  fracBitsMode		  "Best precision"
+	  numFracBits		  "15"
+	  firstCoeffMode	  "Same word length as input"
+	  firstCoeffWordLength	  "16"
+	  firstCoeffFracLength	  "15"
+	  prodOutputMode	  "Inherit via internal rule"
+	  prodOutputWordLength	  "16"
+	  prodOutputFracLength	  "15"
+	  outputMode		  "Same as product output"
+	  outputWordLength	  "16"
+	  outputFracLength	  "15"
+	  roundingMode		  "Floor"
+	  overflowMode		  off
+	  LockScale		  off
+	  numSidelobes		  "4"
+	  sidelobeLevel		  "-30"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Inverse \nShort-Time FFT"
+	  SID			  "198"
+	  Ports			  [2, 1]
+	  Position		  [285, 16, 345, 54]
+	  ZOrder		  121
+	  LibraryVersion	  "1.479"
+	  SourceBlock		  "dspxfrm3/Inverse \nShort-Time FFT"
+	  SourceType		  "Inverse Short-Time FFT"
+	  ContentPreviewEnabled	  off
+	  W			  "numSamplesPer20msFrame"
+	  OvLap			  "overlapSamples"
+	  OutFrameSize		  "numSamplesPer20msFrame"
+	  InConjSymm		  on
+	  DoAssert		  off
+	  Tol			  "1e-4"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  SID			  "199"
+	  Position		  [445, 28, 475, 42]
+	  ZOrder		  163
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  1
+	  SrcBlock		  "Inverse \nShort-Time FFT"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  2
+	  SrcBlock		  "Inverse\nTransform\nWindow"
+	  SrcPort		  1
+	  Points		  [6, 0; 0, -30]
+	  DstBlock		  "Inverse \nShort-Time FFT"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "Inverse \nShort-Time FFT"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
       Name		      "MATLAB Function2"
       SID		      "109"
       Ports		      [1, 1]
-      Position		      [965, 112, 1035, 158]
+      Position		      [965, 212, 1035, 258]
       ZOrder		      169
       Commented		      "on"
       LibraryVersion	      "1.32"
@@ -1477,8 +1619,9 @@ Model {
       Name		      "MS Noise Estimator Handler"
       SID		      "127"
       Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-      Position		      [230, 128, 300, 162]
+      Position		      [230, 228, 300, 262]
       ZOrder		      184
+      Commented		      "on"
       TreatAsAtomicUnit	      on
       RequestExecContextInheritance off
       System {
@@ -1534,7 +1677,7 @@ Model {
       Name		      "Noisy Input"
       SID		      "86"
       Ports		      [0, 1]
-      Position		      [20, 33, 75, 67]
+      Position		      [20, 133, 75, 167]
       ZOrder		      126
       LibraryVersion	      "1.734"
       SourceBlock	      "dspsrcs4/Signal From\nWorkspace"
@@ -1551,8 +1694,9 @@ Model {
       Name		      "PSDmin(lambda, k)"
       SID		      "186"
       Ports		      [1, 1]
-      Position		      [450, 132, 505, 158]
+      Position		      [450, 232, 505, 258]
       ZOrder		      226
+      Commented		      "on"
       RequestExecContextInheritance off
       System {
 	Name			"PSDmin(lambda, k)"
@@ -1664,7 +1808,7 @@ Model {
       Name		      "Product"
       SID		      "110"
       Ports		      [2, 1]
-      Position		      [1105, 32, 1135, 63]
+      Position		      [1105, 132, 1135, 163]
       ZOrder		      170
       Commented		      "on"
       InputSameDT	      off
@@ -1677,8 +1821,9 @@ Model {
       Name		      "Product1"
       SID		      "190"
       Ports		      [2, 1]
-      Position		      [655, 137, 685, 168]
+      Position		      [655, 237, 685, 268]
       ZOrder		      227
+      Commented		      "on"
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       RndMeth		      "Floor"
@@ -1689,8 +1834,9 @@ Model {
       Name		      "Recursively\nSmoothed\nPeriodogram"
       SID		      "174"
       Ports		      [1, 1]
-      Position		      [355, 132, 410, 158]
+      Position		      [355, 232, 410, 258]
       ZOrder		      218
+      Commented		      "on"
       RequestExecContextInheritance off
       System {
 	Name			"Recursively\nSmoothed\nPeriodogram"
@@ -1957,8 +2103,9 @@ Model {
       Name		      "SPP Noise Estimator Handler"
       SID		      "131"
       Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-      Position		      [230, 208, 300, 242]
+      Position		      [230, 308, 300, 342]
       ZOrder		      185
+      Commented		      "on"
       TreatAsAtomicUnit	      on
       RequestExecContextInheritance off
       System {
@@ -2014,8 +2161,9 @@ Model {
       Name		      "Switch Case"
       SID		      "118"
       Ports		      [1, 2]
-      Position		      [100, 161, 175, 199]
+      Position		      [100, 261, 175, 299]
       ZOrder		      175
+      Commented		      "on"
       CaseConditions	      "{1,2}"
       ShowDefaultCase	      off
     }
@@ -2024,9 +2172,29 @@ Model {
       Name		      "To Microphone"
       SID		      "84"
       Ports		      [1]
-      Position		      [1330, 114, 1385, 166]
+      Position		      [1330, 214, 1385, 266]
       ZOrder		      157
       Commented		      "on"
+      LibraryVersion	      "1.509"
+      SourceBlock	      "dspsnks4/To Audio\nDevice"
+      SourceType	      "To Audio Device"
+      deviceName	      "Default"
+      inheritSampleRate	      on
+      sampleRate	      "44100"
+      deviceDatatype	      "Determine from input data type"
+      autoBufferSize	      on
+      bufferSize	      "4096"
+      queueDuration	      "1.0"
+      defaultOutputChannelMapping on
+      outputChannelMapping    "1:2"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "To Microphone1"
+      SID		      "201"
+      Ports		      [1]
+      Position		      [690, 114, 745, 166]
+      ZOrder		      231
       LibraryVersion	      "1.509"
       SourceBlock	      "dspsnks4/To Audio\nDevice"
       SourceType	      "To Audio Device"
@@ -2045,8 +2213,9 @@ Model {
       Name		      "To Workspace"
       SID		      "191"
       Ports		      [1]
-      Position		      [740, 140, 800, 170]
+      Position		      [740, 240, 800, 270]
       ZOrder		      228
+      Commented		      "on"
       VariableName	      "unbiasedNoiseVarianceEstimateMS"
       MaxDataPoints	      "inf"
       SaveFormat	      "Timeseries"
@@ -2059,8 +2228,9 @@ Model {
       Name		      "To Workspace1"
       SID		      "193"
       Ports		      [1]
-      Position		      [370, 210, 430, 240]
+      Position		      [370, 310, 430, 340]
       ZOrder		      229
+      Commented		      "on"
       VariableName	      "unbiasedNoiseVarianceEstimateSPP"
       MaxDataPoints	      "inf"
       SaveFormat	      "Timeseries"
@@ -2192,20 +2362,47 @@ Model {
       DstPort		      1
     }
     Line {
-      ZOrder		      158
-      SrcBlock		      "Framing & Transform"
+      ZOrder		      308
+      SrcBlock		      "Inverse Transform\n&\nOverlap-Add1"
       SrcPort		      1
-      Points		      [29, 0; 0, 95]
+      Points		      [34, 0]
       Branch {
-	ZOrder			206
-	Points			[0, 80]
-	DstBlock		"SPP Noise Estimator Handler"
+	ZOrder			307
+	Points			[0, 90]
+	DstBlock		"To Microphone1"
 	DstPort			1
       }
       Branch {
-	ZOrder			204
-	DstBlock		"MS Noise Estimator Handler"
+	ZOrder			306
+	DstBlock		"Estimated Clean\nOutput1"
 	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      158
+      SrcBlock		      "Framing & Transform"
+      SrcPort		      1
+      Points		      [25, 0]
+      Branch {
+	ZOrder			312
+	Points			[0, -100]
+	DstBlock		"Inverse Transform\n&\nOverlap-Add1"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			311
+	Points			[4, 0; 0, 95]
+	Branch {
+	  ZOrder		  206
+	  Points		  [0, 80]
+	  DstBlock		  "SPP Noise Estimator Handler"
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  204
+	  DstBlock		  "MS Noise Estimator Handler"
+	  DstPort		  1
+	}
       }
     }
   }
