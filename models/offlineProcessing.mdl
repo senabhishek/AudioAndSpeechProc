@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.108"
+    ComputedModelVersion    "1.113"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -56,7 +56,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1406.0, 704.0]
 	ZoomFactor		[1.5]
-	Offset			[11.136085537501986, 20.800000000000217]
+	Offset			[10.666666666666789, 20.666666666666668]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Abhi"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Jun 26 01:20:31 2014"
-  RTWModifiedTimeStamp	  325646425
-  ModelVersionFormat	  "1.%<AutoIncrement:108>"
+  LastModifiedDate	  "Thu Jun 26 10:28:09 2014"
+  RTWModifiedTimeStamp	  325679276
+  ModelVersionFormat	  "1.%<AutoIncrement:113>"
   ConfigurationManager	  "none"
   SampleTimeColors	  on
   SampleTimeAnnotations	  on
@@ -180,7 +180,7 @@ Model {
 	  $ObjectID		  8
 	  Version		  "1.14.2"
 	  StartTime		  "0.0"
-	  StopTime		  "30"
+	  StopTime		  "10"
 	  AbsTol		  "auto"
 	  FixedStep		  "auto"
 	  InitialStep		  "auto"
@@ -1011,13 +1011,14 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "150"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "240"
+    SIDHighWatermark	    "241"
     Block {
       BlockType		      DataStoreMemory
       Name		      "Data Store\nMemory"
       SID		      "214"
-      Position		      [575, 460, 607, 490]
+      Position		      [505, 350, 537, 380]
       ZOrder		      243
+      ForegroundColor	      "[1.000000, 0.258824, 0.819608]"
       DataStoreName	      "msFirstRun"
       ReadBeforeWriteMsg      "warning"
       WriteAfterWriteMsg      "warning"
@@ -1030,7 +1031,7 @@ Model {
       Name		      "Estimated Clean\nOutput"
       SID		      "88"
       Ports		      [1]
-      Position		      [1130, 45, 1200, 75]
+      Position		      [1135, 115, 1205, 145]
       ZOrder		      123
       VariableName	      "offlineFilteredOutput"
       MaxDataPoints	      "inf"
@@ -1185,8 +1186,9 @@ Model {
       BlockType		      FromWorkspace
       Name		      "From\nWorkspace1"
       SID		      "204"
-      Position		      [400, 408, 465, 432]
+      Position		      [385, 318, 450, 342]
       ZOrder		      236
+      ForegroundColor	      "[0.501961, 0.501961, 0.501961]"
       Commented		      "on"
       VariableName	      "unbiasedNoiseVarianceEstimateSPP"
       SampleTime	      "0"
@@ -1194,133 +1196,10 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Gain"
-      SID		      "217"
-      Ports		      [2, 1]
-      Position		      [715, 365, 755, 425]
-      ZOrder		      246
-      Commented		      "on"
-      RequestExecContextInheritance off
-      System {
-	Name			"Gain"
-	Location		[0, 22, 1440, 896]
-	Open			off
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	Block {
-	  BlockType		  Inport
-	  Name			  "In1"
-	  SID			  "218"
-	  Position		  [25, 195, 55, 210]
-	  ZOrder		  241
-	  BlockRotation		  270
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "In2"
-	  SID			  "219"
-	  Position		  [130, 218, 160, 232]
-	  ZOrder		  242
-	  Port			  "2"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Constant
-	  Name			  "Constant1"
-	  SID			  "205"
-	  Position		  [215, 175, 245, 205]
-	  ZOrder		  237
-	}
-	Block {
-	  BlockType		  Product
-	  Name			  "Divide"
-	  SID			  "208"
-	  Ports			  [2, 1]
-	  Position		  [360, 276, 390, 309]
-	  ZOrder		  240
-	  Inputs		  "*/"
-	  InputSameDT		  off
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  RndMeth		  "Floor"
-	  SaturateOnIntegerOverflow off
-	}
-	Block {
-	  BlockType		  Sum
-	  Name			  "Subtract"
-	  SID			  "207"
-	  Ports			  [2, 1]
-	  Position		  [420, 182, 450, 213]
-	  ZOrder		  239
-	  Inputs		  "+-"
-	  InputSameDT		  off
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SaturateOnIntegerOverflow off
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "Out1"
-	  SID			  "220"
-	  Position		  [560, 128, 590, 142]
-	  ZOrder		  243
-	  IconDisplay		  "Port number"
-	}
-	Line {
-	  ZOrder		  339
-	  SrcBlock		  "Subtract"
-	  SrcPort		  1
-	  Points		  [7, 0; 0, -65]
-	  DstBlock		  "Out1"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  330
-	  SrcBlock		  "Divide"
-	  SrcPort		  1
-	  Points		  [10, 0]
-	  DstBlock		  "Subtract"
-	  DstPort		  2
-	}
-	Line {
-	  ZOrder		  331
-	  SrcBlock		  "Constant1"
-	  SrcPort		  1
-	  DstBlock		  "Subtract"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  345
-	  SrcBlock		  "In1"
-	  SrcPort		  1
-	  Points		  [0, -9; 59, 0; 0, 119]
-	  DstBlock		  "Divide"
-	  DstPort		  2
-	}
-	Line {
-	  ZOrder		  338
-	  SrcBlock		  "In2"
-	  SrcPort		  1
-	  Points		  [94, 0; 1, 10; 63, 0; 0, 50]
-	  DstBlock		  "Divide"
-	  DstPort		  1
-	}
-      }
-    }
-    Block {
-      BlockType		      SubSystem
       Name		      "Gain1"
       SID		      "221"
       Ports		      [2, 1]
-      Position		      [695, 75, 735, 135]
+      Position		      [775, 210, 815, 270]
       ZOrder		      247
       RequestExecContextInheritance off
       System {
@@ -1337,12 +1216,12 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"200"
+	ZoomFactor		"125"
 	Block {
 	  BlockType		  Inport
 	  Name			  "In1"
 	  SID			  "222"
-	  Position		  [25, 195, 55, 210]
+	  Position		  [145, 265, 175, 280]
 	  ZOrder		  241
 	  BlockRotation		  270
 	  IconDisplay		  "Port number"
@@ -1351,7 +1230,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "In2"
 	  SID			  "223"
-	  Position		  [130, 228, 160, 242]
+	  Position		  [130, 218, 160, 232]
 	  ZOrder		  242
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -1360,7 +1239,7 @@ Model {
 	  BlockType		  Constant
 	  Name			  "Constant1"
 	  SID			  "224"
-	  Position		  [275, 175, 305, 205]
+	  Position		  [290, 75, 320, 105]
 	  ZOrder		  237
 	}
 	Block {
@@ -1416,6 +1295,7 @@ Model {
 	  ZOrder		  3
 	  SrcBlock		  "Constant1"
 	  SrcPort		  1
+	  Points		  [25, 0; 0, 100]
 	  DstBlock		  "Subtract"
 	  DstPort		  1
 	}
@@ -1423,7 +1303,7 @@ Model {
 	  ZOrder		  7
 	  SrcBlock		  "In1"
 	  SrcPort		  1
-	  Points		  [0, -15; 151, 0; 0, 75]
+	  Points		  [0, -10]
 	  DstBlock		  "Divide"
 	  DstPort		  2
 	}
@@ -1431,6 +1311,7 @@ Model {
 	  ZOrder		  6
 	  SrcBlock		  "In2"
 	  SrcPort		  1
+	  Points		  [75, 0; 0, 10]
 	  DstBlock		  "Divide"
 	  DstPort		  1
 	}
@@ -1441,7 +1322,7 @@ Model {
       Name		      "Inverse Transform\n&\nOverlap-Add"
       SID		      "99"
       Ports		      [1, 1]
-      Position		      [990, 30, 1055, 90]
+      Position		      [990, 145, 1055, 205]
       ZOrder		      163
       RequestExecContextInheritance off
       System {
@@ -1567,8 +1448,9 @@ Model {
       Name		      "MATLAB Function"
       SID		      "202"
       Ports		      [2, 1]
-      Position		      [560, 381, 630, 434]
+      Position		      [485, 256, 555, 309]
       ZOrder		      234
+      ForegroundColor	      "[0.501961, 0.501961, 0.501961]"
       Commented		      "on"
       LibraryVersion	      "1.32"
       ErrorFcn		      "Stateflow.Translate.translate"
@@ -1694,7 +1576,7 @@ Model {
       BlockType		      Constant
       Name		      "MS"
       SID		      "231"
-      Position		      [20, 165, 50, 195]
+      Position		      [20, 135, 50, 165]
       ZOrder		      250
     }
     Block {
@@ -1702,7 +1584,7 @@ Model {
       Name		      "MS Noise Estimator"
       SID		      "237"
       Ports		      [1, 1]
-      Position		      [490, 127, 550, 163]
+      Position		      [490, 122, 550, 158]
       ZOrder		      253
       RequestExecContextInheritance off
       System {
@@ -2220,15 +2102,11 @@ Model {
 	  BlockType		  Outport
 	  Name			  "Out1"
 	  SID			  "239"
-	  Position		  [478, 38, 508, 52]
+	  Position		  [480, 38, 510, 52]
 	  ZOrder		  229
 	  IconDisplay		  "Port number"
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  296
 	  SrcBlock		  "PSDmin(lambda, k)"
 	  SrcPort		  1
@@ -2246,10 +2124,6 @@ Model {
 	  }
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  304
 	  SrcBlock		  "In1"
 	  SrcPort		  1
@@ -2257,10 +2131,6 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  301
 	  SrcBlock		  "Bias Correction"
 	  SrcPort		  1
@@ -2269,10 +2139,6 @@ Model {
 	  DstPort		  2
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  305
 	  SrcBlock		  "Product1"
 	  SrcPort		  1
@@ -2280,10 +2146,6 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  295
 	  SrcBlock		  "Recursively\nSmoothed\nPeriodogram"
 	  SrcPort		  1
@@ -2297,7 +2159,7 @@ Model {
       Name		      "MS Noise Estimator Handler"
       SID		      "127"
       Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-      Position		      [305, 128, 375, 162]
+      Position		      [315, 123, 385, 157]
       ZOrder		      184
       TreatAsAtomicUnit	      on
       RequestExecContextInheritance off
@@ -2353,8 +2215,15 @@ Model {
       BlockType		      ManualSwitch
       Name		      "MS_SPP"
       SID		      "230"
-      Position		      [100, 202, 130, 238]
+      Position		      [100, 172, 130, 208]
       ZOrder		      249
+    }
+    Block {
+      BlockType		      ManualSwitch
+      Name		      "MS_SPP_NoisePowEstimate"
+      SID		      "241"
+      Position		      [680, 192, 710, 228]
+      ZOrder		      254
     }
     Block {
       BlockType		      Reference
@@ -2378,7 +2247,7 @@ Model {
       Name		      "Product2"
       SID		      "209"
       Ports		      [2, 1]
-      Position		      [810, 42, 840, 73]
+      Position		      [885, 157, 915, 188]
       ZOrder		      241
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
@@ -2389,7 +2258,7 @@ Model {
       BlockType		      Constant
       Name		      "SPP"
       SID		      "112"
-      Position		      [20, 240, 50, 270]
+      Position		      [20, 210, 50, 240]
       ZOrder		      172
       Value		      "2"
     }
@@ -2398,8 +2267,9 @@ Model {
       Name		      "SPP Noise Estimator Handler"
       SID		      "131"
       Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-      Position		      [305, 363, 375, 397]
+      Position		      [315, 253, 385, 287]
       ZOrder		      185
+      ForegroundColor	      "[0.501961, 0.501961, 0.501961]"
       Commented		      "on"
       TreatAsAtomicUnit	      on
       RequestExecContextInheritance off
@@ -2456,7 +2326,7 @@ Model {
       Name		      "Switch Case"
       SID		      "118"
       Ports		      [1, 2]
-      Position		      [165, 201, 240, 239]
+      Position		      [165, 171, 240, 209]
       ZOrder		      175
       CaseConditions	      "{1,2}"
       ShowDefaultCase	      off
@@ -2466,7 +2336,7 @@ Model {
       Name		      "To Microphone"
       SID		      "84"
       Ports		      [1]
-      Position		      [1135, 124, 1190, 176]
+      Position		      [1140, 194, 1195, 246]
       ZOrder		      157
       LibraryVersion	      "1.509"
       SourceBlock	      "dspsnks4/To Audio\nDevice"
@@ -2486,9 +2356,10 @@ Model {
       Name		      "To Workspace"
       SID		      "191"
       Ports		      [1]
-      Position		      [685, 175, 745, 205]
+      Position		      [870, 280, 930, 310]
       ZOrder		      228
-      VariableName	      "unbiasedNoiseVarianceEstimateMS"
+      ForegroundColor	      "[0.901961, 0.000000, 0.000000]"
+      VariableName	      "nVarEst"
       MaxDataPoints	      "inf"
       SaveFormat	      "Timeseries"
       Save2DSignal	      "3-D array (concatenate along third dimension)"
@@ -2500,25 +2371,11 @@ Model {
       Name		      "To Workspace1"
       SID		      "193"
       Ports		      [1]
-      Position		      [695, 460, 755, 490]
+      Position		      [680, 370, 740, 400]
       ZOrder		      229
+      ForegroundColor	      "[0.501961, 0.501961, 0.501961]"
       Commented		      "on"
       VariableName	      "unbiasedNoiseVarianceEstimateSPP"
-      MaxDataPoints	      "inf"
-      SaveFormat	      "Timeseries"
-      Save2DSignal	      "3-D array (concatenate along third dimension)"
-      FixptAsFi		      on
-      SampleTime	      "-1"
-    }
-    Block {
-      BlockType		      ToWorkspace
-      Name		      "To Workspace2"
-      SID		      "232"
-      Ports		      [1]
-      Position		      [830, 380, 890, 410]
-      ZOrder		      251
-      Commented		      "on"
-      VariableName	      "nEstSPP"
       MaxDataPoints	      "inf"
       SaveFormat	      "Timeseries"
       Save2DSignal	      "3-D array (concatenate along third dimension)"
@@ -2536,16 +2393,17 @@ Model {
       ZOrder		      159
       SrcBlock		      "Inverse Transform\n&\nOverlap-Add"
       SrcPort		      1
-      Points		      [34, 0]
+      Points		      [39, 0]
       Branch {
-	ZOrder			164
-	Points			[0, 90]
-	DstBlock		"To Microphone"
+	ZOrder			423
+	Points			[0, -45]
+	DstBlock		"Estimated Clean\nOutput"
 	DstPort			1
       }
       Branch {
-	ZOrder			162
-	DstBlock		"Estimated Clean\nOutput"
+	ZOrder			422
+	Points			[0, 45]
+	DstBlock		"To Microphone"
 	DstPort			1
       }
     }
@@ -2553,7 +2411,7 @@ Model {
       ZOrder		      190
       SrcBlock		      "Switch Case"
       SrcPort		      1
-      Points		      [1, 0; 0, -97]
+      Points		      [1, 0; 0, -72]
       DstBlock		      "MS Noise Estimator Handler"
       DstPort		      ifaction
     }
@@ -2561,7 +2419,7 @@ Model {
       ZOrder		      203
       SrcBlock		      "Switch Case"
       SrcPort		      2
-      Points		      [95, 0]
+      Points		      [105, 0]
       DstBlock		      "SPP Noise Estimator Handler"
       DstPort		      ifaction
     }
@@ -2572,25 +2430,25 @@ Model {
       Points		      [29, 0]
       Branch {
 	ZOrder			335
-	Points			[389, 0]
+	Points			[425, 0; 0, 115; 68, 0]
 	Branch {
-	  ZOrder		  359
-	  Points		  [0, 40]
+	  ZOrder		  427
+	  Points		  [0, 60]
 	  DstBlock		  "Gain1"
 	  DstPort		  1
 	}
 	Branch {
-	  ZOrder		  358
+	  ZOrder		  426
 	  DstBlock		  "Product2"
 	  DstPort		  1
 	}
       }
       Branch {
 	ZOrder			333
-	Points			[0, 95]
+	Points			[0, 90]
 	Branch {
 	  ZOrder		  206
-	  Points		  [0, 235]
+	  Points		  [0, 130]
 	  DstBlock		  "SPP Noise Estimator Handler"
 	  DstPort		  1
 	}
@@ -2605,34 +2463,24 @@ Model {
       ZOrder		      315
       SrcBlock		      "SPP Noise Estimator Handler"
       SrcPort		      1
-      Points		      [143, 0]
-      Branch {
-	ZOrder			367
-	Points			[0, -40; 162, 0; 0, 40]
-	DstBlock		"Gain"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			320
-	Points			[0, 15]
-	DstBlock		"MATLAB Function"
-	DstPort			1
-      }
+      DstBlock		      "MATLAB Function"
+      DstPort		      1
     }
     Line {
       ZOrder		      318
       SrcBlock		      "MATLAB Function"
       SrcPort		      1
-      Points		      [33, 0]
+      Points		      [92, 0]
       Branch {
-	ZOrder			368
-	Points			[0, 65]
+	ZOrder			416
+	Points			[0, 100]
 	DstBlock		"To Workspace1"
 	DstPort			1
       }
       Branch {
-	ZOrder			354
-	DstBlock		"Gain"
+	ZOrder			410
+	Points			[0, -65]
+	DstBlock		"MS_SPP_NoisePowEstimate"
 	DstPort			2
       }
     }
@@ -2640,6 +2488,7 @@ Model {
       ZOrder		      319
       SrcBlock		      "From\nWorkspace1"
       SrcPort		      1
+      Points		      [14, 0; 0, -35]
       DstBlock		      "MATLAB Function"
       DstPort		      2
     }
@@ -2647,9 +2496,19 @@ Model {
       ZOrder		      363
       SrcBlock		      "Gain1"
       SrcPort		      1
-      Points		      [22, 0; 0, -40]
-      DstBlock		      "Product2"
-      DstPort		      2
+      Points		      [17, 0]
+      Branch {
+	ZOrder			424
+	Points			[0, -60]
+	DstBlock		"Product2"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			418
+	Points			[0, 55]
+	DstBlock		"To Workspace"
+	DstPort			1
+      }
     }
     Line {
       ZOrder		      369
@@ -2682,29 +2541,12 @@ Model {
       DstPort		      1
     }
     Line {
-      ZOrder		      384
-      SrcBlock		      "Gain"
-      SrcPort		      1
-      DstBlock		      "To Workspace2"
-      DstPort		      1
-    }
-    Line {
       ZOrder		      397
       SrcBlock		      "MS Noise Estimator"
       SrcPort		      1
-      Points		      [98, 0]
-      Branch {
-	ZOrder			400
-	Points			[0, -25]
-	DstBlock		"Gain1"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			399
-	Points			[0, 45]
-	DstBlock		"To Workspace"
-	DstPort			1
-      }
+      Points		      [98, 0; 0, 60]
+      DstBlock		      "MS_SPP_NoisePowEstimate"
+      DstPort		      1
     }
     Line {
       ZOrder		      396
@@ -2712,6 +2554,14 @@ Model {
       SrcPort		      1
       DstBlock		      "MS Noise Estimator"
       DstPort		      1
+    }
+    Line {
+      ZOrder		      407
+      SrcBlock		      "MS_SPP_NoisePowEstimate"
+      SrcPort		      1
+      Points		      [13, 0; 0, 45]
+      DstBlock		      "Gain1"
+      DstPort		      2
     }
   }
 }
@@ -2762,10 +2612,7 @@ Stateflow {
     firstTransition	    9
     firstJunction	    8
     viewObj		    2
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    9
     decomposition	    CLUSTER_CHART
     type		    EML_CHART

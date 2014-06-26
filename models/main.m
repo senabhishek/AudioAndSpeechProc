@@ -15,11 +15,13 @@ disp('=====================================================================');
 
 in = input('MS or SPP? [1/0]: ');
 if (in == 1)
-    % Set switch
-    set_param('offlineProcessing/MS_SPP','sw','1');       
+    % Set MS switch
+    set_param('offlineProcessing/MS_SPP','sw','1');
+    set_param('offlineProcessing/MS_SPP_NoisePowEstimate','sw','1');
 else
-    % Set switch
+    % Set SPP
     set_param('offlineProcessing/MS_SPP','sw','0');
+    set_param('offlineProcessing/MS_SPP_NoisePowEstimate','sw','0');    
 end
 
 disp('=====================================================================');
