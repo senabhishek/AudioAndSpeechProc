@@ -10,8 +10,8 @@ function [numFrames, frameLength, noisyDft, noisyPSD, xsize] = windowAndFrame(no
 
     % Finding out the PSD of noisy input signal
     for i=1:numFrames
-        indices       =  (i-1)*frameStart+1:(i-1)*frameStart+frameLength;
-        noisy_frame   =  modHanWin.*noisy(indices);
+        index       =  (i-1)*frameStart+1:(i-1)*frameStart+frameLength;
+        noisy_frame   =  modHanWin.*noisy(index);
         noisyDftFrame =  fft(noisy_frame,frameLength);
         noisyDftFrame =  noisyDftFrame(1:xsize);
         noisyDft(:,i) =  noisyDftFrame;

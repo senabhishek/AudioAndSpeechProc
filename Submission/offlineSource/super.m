@@ -10,16 +10,15 @@ close all;
 % [noise, FsN, nbitsN, readinfoN] =  wavread('../audio/intersection_soundjay.wav');
 
 noisy = clean+noise(1:size(clean,1));
-PSDEstimation = 1;
+PSDEstimation = 0;
 noisePSDEstAlg = 0;
-speechPSDEstAlg = 1;
+speechPSDEstAlg = 0;
 playFinalOutputFile = 1;
 saveOutputFile = 1;
 outputFileName = 'output';
 
 disp('=====================================================================');
-%in = input('Use default settings? (No - 0, Yes - 1): ');
-in=1;
+in = input('Use default settings? (No - 0, Yes - 1): ');
 if (in == 1) 
     % Print default info
     disp('Input Noise: White Noise');
