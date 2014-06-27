@@ -13,15 +13,14 @@ disp('=====================================================================');
 
 %% Set up model
 
-in = input('MS or SPP? [1/0]: ');
+%in = input('MS or SPP? [1/0]: ');
+in = 1;
 if (in == 1)
     % Set MS switch
     set_param('offlineProcessing/MS_SPP','sw','1');
-    set_param('offlineProcessing/MS_SPP_NoisePowEstimate','sw','1');
 else
     % Set SPP
     set_param('offlineProcessing/MS_SPP','sw','0');
-    set_param('offlineProcessing/MS_SPP_NoisePowEstimate','sw','0');    
 end
 
 disp('=====================================================================');
@@ -30,10 +29,11 @@ disp('=====================================================================');
 
 disp(' ');
 disp('Simulation running...');
-% Run the model
-sim('offlineProcessing');                     % simulink_model_name
-disp('offlineProcessing done.');
 
+% Run the model
+sim('offlineProcessing', 'Stoptime', '5');                     % simulink_model_name
+disp('offlineProcessing done.');
+sound(offlineFilteredOutput.signals.values, FS);
 disp(' ');
 disp('Results');
 
