@@ -1,11 +1,11 @@
-function [numFrames, frameLength, noisyDft, noisyFrames, xsize] = windowAndFrame(noisy, FsN)
+function [numFrames, frameLength, noisyDft, noisyPSD, xsize] = windowAndFrame(noisy)
     % Fixed values
-    frameLength = 32e-3 * FsN;      % frame length
-    frameStart = frameLength / 2;   % frame start
-    numFrames = floor(length(noisy)/frameStart) - 1; % total number of frames
-    modHanWin = Modhanning(frameLength);  % Modified Hanning Window
+    frameLength = 512;
+    frameStart = frameLength/2;
+    numFrames = floor(length(noisy)/frameStart)-1;
+    modHanWin = Modhanning(frameLength);
     xsize = size(zeros(frameLength/2+1, numFrames), 1);
-    noisyFrames = zeros(xsize, numFrames);
+    noisyPSD = zeros(xsize, numFrames);
     noisyDft = zeros(xsize, numFrames);
 
     % Finding out the PSD of noisy input signal
@@ -15,7 +15,7 @@ function [numFrames, frameLength, noisyDft, noisyFrames, xsize] = windowAndFrame
         noisyDftFrame =  fft(noisy_frame,frameLength);
         noisyDftFrame =  noisyDftFrame(1:xsize);
         noisyDft(:,i) =  noisyDftFrame;
-        noisyFrames(:,i) =  transpose(noisyDftFrame.*conj(noisyDftFrame));    
+        noisyPSD(:,i) =  transpose(noisyDftFrame.*conj(noisyDftFrame));    
     end
 end
 

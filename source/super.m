@@ -6,13 +6,13 @@ close all;
 
 % Default Default Inputs
 [clean, FsC, nbitsC, readinfoC] =  wavread('../audio/clean.wav');
-%[noise, FsN, nbitsN, readinfoN] =  wavread('../audio/noise1.wav');
-[noise, FsN, nbitsN, readinfoN] =  wavread('../audio/intersection_soundjay.wav');
+[noise, FsN, nbitsN, readinfoN] =  wavread('../audio/noise1.wav');
+% [noise, FsN, nbitsN, readinfoN] =  wavread('../audio/intersection_soundjay.wav');
 
 noisy = clean+noise(1:size(clean,1));
-PSDEstimation = 0;
-noisePSDEstAlg = 1;
-speechPSDEstAlg = 0;
+PSDEstimation = 1;
+noisePSDEstAlg = 0;
+speechPSDEstAlg = 1;
 playFinalOutputFile = 1;
 saveOutputFile = 1;
 outputFileName = 'output';
@@ -85,7 +85,7 @@ end
 
 %% Window & Framing
 disp('Performing windowing and framing of noisy input ...');
-[numFrames, frameLength, noisyDft, noisyPSD, xsize] = windowAndFrame(noisy, FsN);
+[numFrames, frameLength, noisyDft, noisyPSD, xsize] = windowAndFrame(noisy);
 
 %% Noise PSD Estimation
 if ((PSDEstimation == 0) || (PSDEstimation == 2))
@@ -96,7 +96,7 @@ if ((PSDEstimation == 0) || (PSDEstimation == 2))
             estimatedNoisePower = estNoisePowerMS(numFrames, frameLength, noisyPSD);
         case 1
             % SPP
-            estimatedNoisePower = noiseEstSPP(noisy);
+            estimatedNoisePower = noiseEstSPP(noisy, FsN);
     end
 end
 
