@@ -6,7 +6,9 @@ close all;
 
 % Default Default Inputs
 [clean, FsC, nbitsC, readinfoC] =  wavread('../audio/clean.wav');
-[noise, FsN, nbitsN, readinfoN] =  wavread('../audio/noise1.wav');
+% [noise, FsN, nbitsN, readinfoN] =  wavread('../audio/noise1.wav');
+[noise, FsN, nbitsN, readinfoN] =  wavread('../audio/intersection_soundjay.wav');
+
 noisy = clean+noise(1:size(clean,1));
 PSDEstimation = 0;
 noisePSDEstAlg = 0;
@@ -85,7 +87,7 @@ end
 
 %% Window & Framing
 disp('Performing windowing and framing of noisy input ...');
-[numFrames, frameLength, noisyDft, noisyPer, xsize] = windowAndFrame(noisy, FsN);
+[numFrames, frameLength, noisyDft, noisyFrames, xsize] = windowAndFrame(noisy, FsN);
 
 %% Noise PSD Estimation
 if ((PSDEstimation == 0) || (PSDEstimation == 2))
@@ -93,7 +95,7 @@ if ((PSDEstimation == 0) || (PSDEstimation == 2))
     switch noisePSDEstAlg
         case 0
             % MS
-            noisePowMat = estNoisePowerMS(noisyPer, FsC);
+            noisePowMat = estNoisePowerMS(numFrames, frameLength, noisyFrames);
         case 1
             % SPP
             noisePowMat = noisePowProposed(noisy, FsC);
@@ -111,11 +113,11 @@ end
 
 %% Gain Function & Application on Spectral Components
 disp('Computing Gain & Applying to Spectral Components ...');
-[gain, estimate] = calculateGain(noisePowMat, noisyPer, noisyDft);
+[gain, estimate] = calculateGain(noisePowMat, noisyFrames, noisyDft);
 
 %% IFFT and Overlap & Add
 disp('IFFT & Reconstruction of Speech Frames ...');
-finalOutputEstimate = ifftAndOverlapAdd(numFrames, estimate, frameLength, xsize, size(noisyPer));
+finalOutputEstimate = ifftAndOverlapAdd(numFrames, estimate, frameLength, xsize, size(noisyFrames));
 
 %% Play Output Sound
 if (playFinalOutputFile == 1)
