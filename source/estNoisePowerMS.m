@@ -10,7 +10,7 @@ function [estimatedNoisePower] = estNoisePowerMS(numFrames, frameLength, noisyPS
     
     % Compute Recursive Smoothed Periodograjjkm
     for i=2:numFrames
-       P(:,i) = alpha*P(:,i) + (1-alpha)*noisyPSD(:,i);
+       P(:,i) = alpha*P(:,i-1) + (1-alpha)*noisyPSD(:,i);
     end
 
     Pmin = P;    
