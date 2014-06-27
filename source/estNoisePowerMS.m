@@ -1,4 +1,4 @@
-function [noisePowMat] = estNoisePowerMS(numFrames, frameLength, noisyFrames)
+function [estimatedNoisePower] = estNoisePowerMS(numFrames, frameLength, noisyPSD)
     alpha = 0.75;
     windowLen = 10;    % Window length to compute Pmin over 10 frames i.e.
                        % 10 * frameLength = 10*512 = 5120 samples
@@ -10,7 +10,7 @@ function [noisePowMat] = estNoisePowerMS(numFrames, frameLength, noisyFrames)
     
     % Compute Recursive Smoothed Periodograjjkm
     for i=2:numFrames
-       P(:,i) = alpha*P(:,i) + (1-alpha)*noisyFrames(:,i);
+       P(:,i) = alpha*P(:,i) + (1-alpha)*noisyPSD(:,i);
     end
 
     Pmin = P;    
@@ -24,6 +24,6 @@ function [noisePowMat] = estNoisePowerMS(numFrames, frameLength, noisyFrames)
     end
        
     % Compute Unbiased Noise Estimate
-    noisePowMat = Pmin./Bmin;
+    estimatedNoisePower = Pmin./Bmin;
 end
 

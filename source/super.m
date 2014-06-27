@@ -6,19 +6,20 @@ close all;
 
 % Default Default Inputs
 [clean, FsC, nbitsC, readinfoC] =  wavread('../audio/clean.wav');
-% [noise, FsN, nbitsN, readinfoN] =  wavread('../audio/noise1.wav');
+%[noise, FsN, nbitsN, readinfoN] =  wavread('../audio/noise1.wav');
 [noise, FsN, nbitsN, readinfoN] =  wavread('../audio/intersection_soundjay.wav');
 
 noisy = clean+noise(1:size(clean,1));
-PSDEstimation = 0;
+PSDEstimation = 1;
 noisePSDEstAlg = 0;
-speechPSDEstAlg = 0;
+speechPSDEstAlg = 1;
 playFinalOutputFile = 1;
 saveOutputFile = 1;
 outputFileName = 'output';
 
 disp('=====================================================================');
-in = input('Use default settings? (No - 0, Yes - 1): ');
+%in = input('Use default settings? (No - 0, Yes - 1): ');
+in=1;
 if (in == 1) 
     % Print default info
     disp('Input Noise: White Noise');
@@ -29,7 +30,7 @@ else
     disp('=====================================================================');
     in = input('Pick an input noise .wav file (White Noise - 0, Intersection - 1): ');
     if (in == 0)
-        [noise, FsN, nbitsN, readinfoN] =  wavread('../audio/intersection_soundjay.wav');
+        [noise, FsN, nbitsN, readinfoN] =  audioread('../audio/intersection_soundjay.wav');
         noisy = clean+noise(1:size(clean,1));
     end
 
@@ -41,22 +42,19 @@ else
         case 0
             disp('=====================================================================');
             noisePSDEstAlg = input('Pick a Noise PSD Estimation Algorithm (MS - 0, SPP - 1): ');
-            disp('=====================================================================');          
         case 1
             disp('=====================================================================');
             speechPSDEstAlg = input('Pick a Speech PSD Estimation Algorithm (Directed Decision - 0): ');
-            disp('=====================================================================');          
         case 2
             disp('=====================================================================');
             noisePSDEstAlg = input('Pick a Noise PSD Estimation Algorithm (MS - 0, SPP - 1): ');
             disp('=====================================================================');
             speechPSDEstAlg = input('Pick a Speech PSD Estimation Algorithm (Directed Decision - 0): ');
-            disp('=====================================================================');                      
     end
     
     % Playback files
+    disp('=====================================================================');                          
     playInputFile = input('Play Clean Audio File? (No - 0, Yes - 1): ');
-    disp('=====================================================================');
     if (playInputFile == 1)
         sound(clean, FsC);
     end
@@ -74,12 +72,12 @@ else
     end  
     
     disp('=====================================================================');
-    playFinalOutputFile = input('Play Estimated Output File? (No - 0, Yes - 1): ');
+    playFinalOutputFile = input('Play Output File? (No - 0, Yes - 1): ');
     disp('=====================================================================');    
     
     saveOutputFile = input('Save output as a .wav file? (No - 0, Yes - 1): ');
     if (saveOutputFile == 1)
-        outputFileName = input('Please enter a valid output filename: ');
+        outputFileName = input('Please enter a valid output filename: ', 's');
         disp('=====================================================================');            
     end    
 end
@@ -87,7 +85,7 @@ end
 
 %% Window & Framing
 disp('Performing windowing and framing of noisy input ...');
-[numFrames, frameLength, noisyDft, noisyFrames, xsize] = windowAndFrame(noisy, FsN);
+[numFrames, frameLength, noisyDft, noisyPSD, xsize] = windowAndFrame(noisy, FsN);
 
 %% Noise PSD Estimation
 if ((PSDEstimation == 0) || (PSDEstimation == 2))
@@ -95,10 +93,10 @@ if ((PSDEstimation == 0) || (PSDEstimation == 2))
     switch noisePSDEstAlg
         case 0
             % MS
-            noisePowMat = estNoisePowerMS(numFrames, frameLength, noisyFrames);
+            estimatedNoisePower = estNoisePowerMS(numFrames, frameLength, noisyPSD);
         case 1
             % SPP
-            noisePowMat = noisePowProposed(noisy, FsC);
+            estimatedNoisePower = noisePowProposed(noisy, FsC);
     end
 end
 
@@ -106,19 +104,20 @@ end
 if ((PSDEstimation == 1) || (PSDEstimation == 2))
     disp('Speech PSD Estimation ...');
     switch speechPSDEstAlg
-        case 0
+        case 1
             % Directed Decision
-            speechEStDD(noisy);
-    end    
+            estimatedSpeechPower = speechEStDD(numFrames, frameLength, noisyPSD);
+            estimatedNoisePower = noisyPSD - estimatedSpeechPower;
+    end
 end
 
 %% Gain Function & Application on Spectral Components
 disp('Computing Gain & Applying to Spectral Components ...');
-[gain, estimate] = calculateGain(noisePowMat, noisyFrames, noisyDft);
+[gain, estimate] = calculateGain(estimatedNoisePower, noisyPSD, noisyDft);
 
 %% IFFT and Overlap & Add
 disp('IFFT & Reconstruction of Speech Frames ...');
-finalOutputEstimate = ifftAndOverlapAdd(numFrames, estimate, frameLength, xsize, size(noisyFrames));
+finalOutputEstimate = ifftAndOverlapAdd(numFrames, estimate, frameLength, xsize, size(noisyPSD));
 
 %% Play Output Sound
 if (playFinalOutputFile == 1)
