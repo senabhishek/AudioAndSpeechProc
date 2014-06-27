@@ -108,6 +108,7 @@ if ((PSDEstimation == 1) || (PSDEstimation == 2))
     switch speechPSDEstAlg
         case 0
             % Directed Decision
+            speechEStDD(noisy);
     end    
 end
 
