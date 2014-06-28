@@ -14,7 +14,7 @@ sampleOutputWavFiles folder contains the sample output .wav files that were gene
 
 x - 1(stationary), 2(non-stationary)
 
-This folder also contains the PESQ executable that was used to evaluate the output .wav files.
+This folder also contains the PESQ executable that was used to evaluate the output .wav files. Please rename this file to PESQ.exe.
 
 5.Models
 models folder contains the offline processing simulink model. To invoke the model, please open the "matlab.mat" file from the workspace and run the "main.m" file.
